@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -12,7 +13,7 @@
             box-sizing: border-box;
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
-        
+
         body {
             background: linear-gradient(135deg, #1a2a6c, #b21f1f, #fdbb2d);
             min-height: 100vh;
@@ -23,16 +24,15 @@
             color: white;
             position: relative;
         }
-        
+
         .container {
             max-width: 800px;
             width: 100%;
             margin: 0 auto;
             padding: 0 15px;
         }
-        
-        /* Logo styling - Fixed positioning */
-         .logo-container {
+
+        .logo-container {
             position: absolute;
             top: 20px;
             right: 55px;
@@ -41,22 +41,13 @@
             flex-direction: column;
             align-items: center;
         }
-        
+
         .logo {
             height: 121px;
             width: auto;
             margin-bottom: 5px;
         }
-        
-        .logo-text {
-            font-size: 0.8rem;
-            font-weight: bold;
-            text-align: center;
-            color: #fff;
-            letter-spacing: 1px;
-            text-shadow: 0 1px 3px rgba(0,0,0,0.5);
-        }
-        
+
         header {
             text-align: center;
             padding: 20px 0;
@@ -64,19 +55,19 @@
             position: relative;
             margin-top: 20px;
         }
-        
+
         h1 {
             font-size: 2.8rem;
             margin-bottom: 10px;
             text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
         }
-        
+
         .subtitle {
             font-size: 1.4rem;
             margin-bottom: 30px;
             opacity: 0.9;
         }
-        
+
         .wheel-container {
             position: relative;
             width: 100%;
@@ -84,7 +75,7 @@
             margin: 20px auto;
             aspect-ratio: 1/1;
         }
-        
+
         .wheel {
             width: 100%;
             height: 100%;
@@ -93,18 +84,16 @@
             overflow: hidden;
             transition: transform 5s cubic-bezier(0.2, 0.8, 0.2, 1);
             box-shadow: 0 0 30px rgba(0, 0, 0, 0.4);
-            background: conic-gradient(
-                #e74c3c 0deg 72deg,
-                #3498db 72deg 144deg,
-                #2ecc71 144deg 216deg,
-                #f1c40f 216deg 288deg,
-                #9b59b6 288deg 360deg
-            );
+            background: conic-gradient(#e74c3c 0deg 72deg,
+                    #3498db 72deg 144deg,
+                    #2ecc71 144deg 216deg,
+                    #f1c40f 216deg 288deg,
+                    #9b59b6 288deg 360deg);
             display: flex;
             justify-content: center;
             align-items: center;
         }
-        
+
         .wheel-inner {
             width: 30%;
             height: 30%;
@@ -118,15 +107,15 @@
             align-items: center;
             box-shadow: 0 0 15px rgba(0, 0, 0, 0.4);
         }
-        
+
         .wheel-text {
-            font-size: 1.8rem;
+            font-size: 1.7rem;
             font-weight: bold;
             color: #333;
             text-align: center;
             margin-bottom: 5px;
         }
-        
+
         .wheel-labels {
             position: absolute;
             width: 100%;
@@ -135,23 +124,29 @@
             left: 0;
             pointer-events: none;
         }
-        
+
         .wheel-label {
             position: absolute;
-            font-size: 1.6rem;
+            font-size: 1.2rem;
             font-weight: bold;
             color: white;
             text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
             height: 50%;
-            transform-origin: bottom center;
-            left: 44%;
+            left: 50%;
             bottom: 50%;
             display: flex;
             justify-content: center;
             align-items: flex-end;
-            padding-bottom: 40%;
+            text-align: center;
+            line-height: 1.2;
+            width: 120px;
+            transform-origin: bottom center;
+            transform: translateX(-50%) rotate(var(--rotation));
+            padding-bottom: 25%;
+            word-break: break-word;
+            hyphens: auto;
         }
-        
+
         .pointer {
             position: absolute;
             top: -35px;
@@ -164,7 +159,7 @@
             z-index: 10;
             box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
         }
-        
+
         .spin-button {
             background: linear-gradient(45deg, #ff8c00, #ff4500);
             color: white;
@@ -182,19 +177,19 @@
             margin-left: auto;
             margin-right: auto;
         }
-        
+
         .spin-button:hover {
             transform: translateY(-3px);
             box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4);
         }
-        
+
         .spin-button:disabled {
             background: #555;
             cursor: not-allowed;
             transform: none;
             box-shadow: none;
         }
-        
+
         .result {
             font-size: 1.8rem;
             text-align: center;
@@ -212,21 +207,21 @@
             justify-content: center;
             flex-wrap: wrap;
         }
-        
+
         .input-group {
             width: 100%;
             max-width: 480px;
-            margin: 25px auto;
+            margin: 15px auto;
             padding: 0 15px;
         }
-        
+
         label {
             display: block;
             margin-bottom: 12px;
             font-size: 1.3rem;
             text-align: center;
         }
-        
+
         input {
             width: 100%;
             padding: 18px;
@@ -237,12 +232,12 @@
             font-size: 1.2rem;
             text-align: center;
         }
-        
+
         input:focus {
             outline: none;
             border-color: #ffd700;
         }
-        
+
         .color-box {
             display: inline-block;
             width: 25px;
@@ -252,7 +247,7 @@
             border-radius: 5px;
             border: 1px solid rgba(0, 0, 0, 0.3);
         }
-        
+
         .color-indicator {
             display: inline-flex;
             align-items: center;
@@ -261,7 +256,7 @@
             background: rgba(0, 0, 0, 0.2);
             margin-top: 10px;
         }
-        
+
         .completed-message {
             font-size: 1.8rem;
             color: #ff5252;
@@ -275,12 +270,17 @@
             margin-left: auto;
             margin-right: auto;
         }
-        
+
         .participant-id {
             font-weight: bold;
             color: #ffd700;
         }
-        
+
+        .participant-name {
+            font-weight: bold;
+            color: #4dff88;
+        }
+
         .footer {
             margin-top: 40px;
             text-align: center;
@@ -289,7 +289,7 @@
             opacity: 0.8;
             font-size: 1.1rem;
         }
-        
+
         .glitch-instructions {
             font-size: 1.1rem;
             text-align: center;
@@ -301,29 +301,30 @@
             margin-left: auto;
             margin-right: auto;
         }
-        
+
         /* Mobile Responsive Updates */
         @media (max-width: 600px) {
             h1 {
                 font-size: 2.3rem;
                 margin-bottom: 8px;
             }
-            
+
             .subtitle {
                 font-size: 1.1rem;
                 margin-bottom: 20px;
             }
-            
+
             .wheel-container {
                 max-width: 90vw;
                 max-height: 90vw;
             }
-            
+
             .wheel-label {
-                padding-bottom: 35%;
-                font-size: 1.4rem;
+                font-size: 1.1rem;
+                width: 100px;
+                padding-bottom: 40%;
             }
-            
+
             .wheel-inner {
                 width: 25%;
                 height: 25%;
@@ -332,37 +333,37 @@
             .wheel-text {
                 font-size: 0.9rem;
             }
-            
+
             .spin-button {
                 padding: 15px 20px;
                 font-size: 1.2rem;
             }
-            
+
             .result {
                 font-size: 1.5rem;
                 padding: 12px 20px;
             }
-            
+
             .input-group {
-                margin: 15px auto;
+                margin: 10px auto;
             }
-            
+
             label {
                 font-size: 1.1rem;
                 margin-bottom: 8px;
             }
-            
+
             input {
                 padding: 15px;
                 font-size: 1.1rem;
             }
-            
+
             .completed-message {
                 font-size: 1.5rem;
                 padding: 20px;
                 margin: 20px 0;
             }
-            
+
             /* Mobile logo adjustments */
             .logo-container {
                 top: 15px;
@@ -370,66 +371,64 @@
                 padding: 8px;
                 max-width: 150px;
             }
-            
+
             .logo {
                 height: 35px;
             }
-            
-            .logo-text {
-                font-size: 0.65rem;
-            }
         }
-        
+
         @media (max-width: 400px) {
             h1 {
                 font-size: 2rem;
             }
-            
+
             .subtitle {
                 font-size: 1rem;
             }
-            
+
             .wheel-label {
-                font-size: 1.1rem;
-                padding-bottom: 30%;
+                font-size: 0.95rem;
+                padding-bottom: 26%;
+                width: 85px;
             }
 
             .wheel-text {
                 font-size: 0.8rem;
             }
-            
+
             .spin-button {
                 font-size: 1.1rem;
                 padding: 14px 18px;
             }
-            
+
             .result {
                 font-size: 1.3rem;
             }
-            
+
             .completed-message {
                 font-size: 1.3rem;
                 padding: 15px;
             }
         }
     </style>
-    
+
     <!-- Firebase SDK -->
     <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-database.js"></script>
 </head>
+
 <body>
     <!-- Logo in top right corner -->
     <div class="logo-container">
         <img src="LOGO/adrenalin_Logo.jpg" alt="Adrenalin Logo" class="logo">
     </div>
-    
+
     <div class="container">
         <header>
             <h1><i class="fas fa-sync-alt"></i> Team Selection</h1>
             <div class="subtitle">Spin Wheel</div>
         </header>
-        
+
         <div class="wheel-container">
             <div class="pointer"></div>
             <div class="wheel" id="wheel">
@@ -438,237 +437,271 @@
                     <div class="wheel-text">TSOA</div>
                 </div>
                 <div class="wheel-labels">
-                    <div class="wheel-label" style="transform: rotate(36deg);">Red</div>
-                    <div class="wheel-label" style="transform: rotate(108deg);">Blue</div>
-                    <div class="wheel-label" style="transform: rotate(180deg);">Green</div>
-                    <div class="wheel-label" style="transform: rotate(252deg);">Yellow</div>
-                    <div class="wheel-label" style="transform: rotate(324deg);">Purple</div>
+                    <div class="wheel-label" style="--rotation: 36deg">Passion</div>
+
+                    <div class="wheel-label" style="--rotation: 108deg">Challenge &<br>Speaking up</div>
+
+                    <div class="wheel-label" style="--rotation: 180deg">Customer<br>Delight</div>
+
+                    <div class="wheel-label" style="--rotation: 252deg">Respect</div>
+
+                    <div class="wheel-label" style="--rotation: 324deg">Quality</div>
                 </div>
             </div>
         </div>
-        
+
+        <!-- New Employee Name Field -->
+        <div class="input-group">
+            <label for="employeeName">Enter Your Name:</label>
+            <input type="text" id="employeeName" placeholder="E.g., John Smith" maxlength="50">
+        </div>
+
+        <!-- Existing Employee ID Field -->
         <div class="input-group">
             <label for="employeeId">Enter Your Employee ID:</label>
             <input type="text" id="employeeId" placeholder="E.g., EMP12345" maxlength="20">
         </div>
-        
-        <button class="spin-button" id="spinButton">SPIN THE WHEEL</button>
-        
-        <div class="result" id="result">
-            Your team color will appear here
-        </div>
-        
-        <div id="alreadyCompleted" class="completed-message" style="display: none;">
-            <i class="fas fa-exclamation-triangle"></i> This assignment is already completed for <span class="participant-id" id="completedId"></span>
-        </div>
-        
-        <div class="glitch-instructions" id="glitchInstructions" style="display: none;">
-            <i class="fas fa-info-circle"></i> If you encountered a technical issue, please contact the event host for assistance.
-        </div>
-        
-        <div class="footer">
-            <p>Team Selection Event | 5 Color Teams</p>
-            <p>Only one spin allowed per participant</p>
-        </div>
-    </div>
 
-    <script>
-        // Firebase Configuration
-        const firebaseConfig = {
-            apiKey: "AIzaSyDRKFLiU0ZJYy0ywoPWS0eSE6JSGy3aaLo",
-            authDomain: "adrenalintsoateamselectionapp.firebaseapp.com",
-            databaseURL: "https://adrenalintsoateamselectionapp-default-rtdb.firebaseio.com",
-            projectId: "adrenalintsoateamselectionapp",
-            storageBucket: "adrenalintsoateamselectionapp.firebasestorage.app",
-            messagingSenderId: "1058584687065",
-            appId: "1:1058584687065:web:7e9d8d3e209dbdee9fe9c8",
-            measurementId: "G-084Q4KL0WB"
-        };
-        
-        // Initialize Firebase
-        let database;
-        try {
-            firebase.initializeApp(firebaseConfig);
-            console.log("Firebase initialized successfully");
-            database = firebase.database();
-        } catch (error) {
-            console.error("Firebase initialization error:", error);
-            // Show technical issue message
-            document.getElementById('glitchInstructions').style.display = 'block';
-        }
-        
-        // Configuration
-        const colors = [
-            { name: "Red", value: "#e74c3c" },
-            { name: "Blue", value: "#3498db" },
-            { name: "Green", value: "#2ecc71" },
-            { name: "Yellow", value: "#f1c40f" },
-            { name: "Purple", value: "#9b59b6" }
-        ];
-        
-        // Check if participant has already spun
-        function checkParticipant(employeeId) {
-            const assignments = JSON.parse(localStorage.getItem('teamAssignments') || '{}');
-            return assignments[employeeId];
-        }
-        
-        // Save participant assignment
-        function saveAssignment(employeeId, color) {
-            // Save to Firebase
-            if (database) {
-                database.ref('assignments/' + employeeId).set({
-                    team: color.name,
-                    timestamp: new Date().getTime()
-                });
-            } else {
-                console.error("Firebase database not initialized");
+        <button class="spin-button" id="spinButton">SPIN THE WHEEL</button>
+
+        <div class="result" id="result">
+            Your team value will appear here
+        </div>
+
+        <div id="alreadyCompleted" class="completed-message" style="display: none;">
+            <i class="fas fa-exclamation-triangle"></i> This assignment is already completed for
+            <span class="participant-name" id="completedName"></span>
+            (<span class="participant-id" id="completedId"></span>)
+        </div>
+
+        <div class="glitch-instructions" id="glitchInstructions" style="display: none;">
+            <i class="fas fa-info-circle"></i> If you encountered a technical issue, please contact the event host for
+            assistance.
+        </div>
+
+        <div class="footer">
+            <p>Adrenalin eSystems Ltd</p>
+        </div>
+
+        <script>
+            // Firebase Configuration
+            const firebaseConfig = {
+                apiKey: "AIzaSyDRKFLiU0ZJYy0ywoPWS0eSE6JSGy3aaLo",
+                authDomain: "adrenalintsoateamselectionapp.firebaseapp.com",
+                databaseURL: "https://adrenalintsoateamselectionapp-default-rtdb.firebaseio.com",
+                projectId: "adrenalintsoateamselectionapp",
+                storageBucket: "adrenalintsoateamselectionapp.firebasestorage.app",
+                messagingSenderId: "1058584687065",
+                appId: "1:1058584687065:web:7e9d8d3e209dbdee9fe9c8",
+                measurementId: "G-084Q4KL0WB"
+            };
+
+            // Initialize Firebase
+            let database;
+            try {
+                firebase.initializeApp(firebaseConfig);
+                console.log("Firebase initialized successfully");
+                database = firebase.database();
+            } catch (error) {
+                console.error("Firebase initialization error:", error);
                 // Show technical issue message
                 document.getElementById('glitchInstructions').style.display = 'block';
-                return false;
             }
-            
-            // Save to localStorage
-            const assignments = JSON.parse(localStorage.getItem('teamAssignments') || '{}');
-            assignments[employeeId] = { team: color.name, timestamp: new Date().getTime() };
-            localStorage.setItem('teamAssignments', JSON.stringify(assignments));
-            
-            return true;
-        }
-        
-        // Show already completed message
-        function showCompletedMessage(employeeId, color) {
-            const employeeIdInput = document.getElementById('employeeId');
-            const spinButton = document.getElementById('spinButton');
-            const resultDiv = document.getElementById('result');
-            const completedMessage = document.getElementById('alreadyCompleted');
-            const completedId = document.getElementById('completedId');
-            
-            employeeIdInput.disabled = true;
-            spinButton.disabled = true;
-            
-            completedId.textContent = employeeId;
-            completedMessage.style.display = 'block';
-            
-            // Show their assigned color
-            resultDiv.innerHTML = `<div class="color-indicator">
-                <span class="color-box" style="background:${color.value}"></span>
-                <span>Your team is: <strong>${color.name}</strong></span>
-            </div>`;
-        }
-        
-        // Simulate spinning animation with precise pointer alignment
-        function spinWheel() {
-            const wheel = document.getElementById('wheel');
-            const spinButton = document.getElementById('spinButton');
-            const employeeIdInput = document.getElementById('employeeId');
-            const employeeId = employeeIdInput.value.trim();
-            const resultDiv = document.getElementById('result');
-            
-            if (!employeeId) {
-                alert("Please enter your Employee ID");
-                return;
+
+            // Updated Configuration with new labels
+            const colors = [
+                { name: "Passion", value: "#e74c3c" },
+                { name: "Challenge & Speaking up", value: "#3498db" },
+                { name: "Customer Delight", value: "#2ecc71" },
+                { name: "Respect", value: "#f1c40f" },
+                { name: "Quality", value: "#9b59b6" }
+            ];
+
+            // Check if participant has already spun
+            function checkParticipant(employeeId) {
+                const assignments = JSON.parse(localStorage.getItem('teamAssignments') || '{}');
+                return assignments[employeeId];
             }
-            
-            // Check if already completed
-            const existingAssignment = checkParticipant(employeeId);
-            if (existingAssignment) {
-                const color = colors.find(c => c.name === existingAssignment.team);
-                showCompletedMessage(employeeId, color);
-                return;
-            }
-            
-            // Disable button during spin
-            spinButton.disabled = true;
-            resultDiv.textContent = "Spinning...";
-            
-            // Generate random rotation (5 full rotations + random segment)
-            const fullRotations = 5;
-            const segmentAngle = 360 / colors.length;
-            const randomSegment = Math.floor(Math.random() * colors.length);
-            
-            // Calculate rotation to land in the middle of a segment
-            const rotation = (fullRotations * 360) + (randomSegment * segmentAngle) + (segmentAngle / 2);
-            
-            // Apply rotation
-            wheel.style.transform = `rotate(${rotation}deg)`;
-            
-            // Calculate the actual segment at the pointer
-            const normalizedRotation = (360 - (rotation % 360)) % 360;
-            const segmentIndex = Math.floor(normalizedRotation / segmentAngle) % colors.length;
-            const color = colors[segmentIndex];
-            
-            // Simulate server request delay
-            setTimeout(() => {
-                // Save assignment
-                const success = saveAssignment(employeeId, color);
-                
-                if (!success) {
-                    // Handle Firebase error
-                    resultDiv.innerHTML = "Technical error! Please contact host";
-                    spinButton.disabled = false;
-                    return;
+
+            // Save participant assignment
+            function saveAssignment(employeeId, employeeName, color) {
+                // Save to Firebase
+                if (database) {
+                    database.ref('assignments/' + employeeId).set({
+                        team: color.name,
+                        name: employeeName, // Store employee name
+                        timestamp: new Date().getTime()
+                    });
+                } else {
+                    console.error("Firebase database not initialized");
+                    // Show technical issue message
+                    document.getElementById('glitchInstructions').style.display = 'block';
+                    return false;
                 }
-                
-                // Update UI
+
+                // Save to localStorage
+                const assignments = JSON.parse(localStorage.getItem('teamAssignments') || '{}');
+                assignments[employeeId] = {
+                    team: color.name,
+                    name: employeeName, // Store employee name
+                    timestamp: new Date().getTime()
+                };
+                localStorage.setItem('teamAssignments', JSON.stringify(assignments));
+
+                return true;
+            }
+
+            // Show already completed message
+            function showCompletedMessage(employeeId, employeeName, color) {
+                const employeeIdInput = document.getElementById('employeeId');
+                const employeeNameInput = document.getElementById('employeeName');
+                const spinButton = document.getElementById('spinButton');
+                const resultDiv = document.getElementById('result');
+                const completedMessage = document.getElementById('alreadyCompleted');
+                const completedId = document.getElementById('completedId');
+                const completedName = document.getElementById('completedName');
+
+                employeeIdInput.disabled = true;
+                employeeNameInput.disabled = true;
+                spinButton.disabled = true;
+
+                completedId.textContent = employeeId;
+                completedName.textContent = employeeName || "participant";
+                completedMessage.style.display = 'block';
+
+                // Show their assigned color
                 resultDiv.innerHTML = `<div class="color-indicator">
                     <span class="color-box" style="background:${color.value}"></span>
-                    <span>Your team is: <strong>${color.name}</strong></span>
+                    <span>${employeeName ? 'Hi ' + employeeName + ', ' : ''}Your team is: <strong>${color.name}</strong></span>
                 </div>`;
-                
-                // Disable further spins
-                employeeIdInput.disabled = true;
-                
-                // Show success message
-                setTimeout(() => {
-                    alert(`Assignment complete! You are on the ${color.name} team.`);
-                }, 500);
-            }, 5000);
-        }
-        
-        // Initialize the app
-        document.addEventListener('DOMContentLoaded', () => {
-            // Check if participant has already spun
-            const assignments = JSON.parse(localStorage.getItem('teamAssignments') || '{}');
-            const employeeIdInput = document.getElementById('employeeId');
-            const spinButton = document.getElementById('spinButton');
-            
-            // Check if there's an assignment for this session
-            for (const id in assignments) {
-                if (assignments.hasOwnProperty(id)) {
-                    const color = colors.find(c => c.name === assignments[id].team);
-                    employeeIdInput.value = id;
-                    employeeIdInput.disabled = true;
-                    spinButton.disabled = true;
-                    
-                    document.getElementById('result').innerHTML = `<div class="color-indicator">
-                        <span class="color-box" style="background:${color.value}"></span>
-                        <span>Your team is: <strong>${color.name}</strong></span>
-                    </div>`;
-                    
-                    document.getElementById('completedId').textContent = id;
-                    document.getElementById('alreadyCompleted').style.display = 'block';
-                    break;
+            }
+
+            // Simulate spinning animation with precise pointer alignment
+            function spinWheel() {
+                const wheel = document.getElementById('wheel');
+                const spinButton = document.getElementById('spinButton');
+                const employeeIdInput = document.getElementById('employeeId');
+                const employeeNameInput = document.getElementById('employeeName');
+                const employeeId = employeeIdInput.value.trim();
+                const employeeName = employeeNameInput.value.trim();
+                const resultDiv = document.getElementById('result');
+
+                if (!employeeId) {
+                    alert("Please enter your Employee ID");
+                    return;
                 }
-            }
-            
-            // Set up event listeners
-            document.getElementById('spinButton').addEventListener('click', spinWheel);
-            
-            // Add real-time listener for manual assignments
-            if (database) {
-                database.ref('assignments').on('value', (snapshot) => {
-                    const assignments = snapshot.val() || {};
-                    localStorage.setItem('teamAssignments', JSON.stringify(assignments));
-                    
-                    // Check if current user has been assigned
-                    const employeeId = document.getElementById('employeeId').value;
-                    if (employeeId && assignments[employeeId]) {
-                        const color = colors.find(c => c.name === assignments[employeeId].team);
-                        showCompletedMessage(employeeId, color);
+
+                if (!employeeName) {
+                    alert("Please enter your Name");
+                    return;
+                }
+
+                // Check if already completed
+                const existingAssignment = checkParticipant(employeeId);
+                if (existingAssignment) {
+                    const color = colors.find(c => c.name === existingAssignment.team);
+                    showCompletedMessage(employeeId, existingAssignment.name, color);
+                    return;
+                }
+
+                // Disable button during spin
+                spinButton.disabled = true;
+                resultDiv.textContent = "Spinning...";
+
+                // Generate random rotation (5 full rotations + random segment)
+                const fullRotations = 5;
+                const segmentAngle = 360 / colors.length;
+                const randomSegment = Math.floor(Math.random() * colors.length);
+
+                // Calculate rotation to land in the middle of a segment
+                const rotation = (fullRotations * 360) + (randomSegment * segmentAngle) + (segmentAngle / 2);
+
+                // Apply rotation
+                wheel.style.transform = `rotate(${rotation}deg)`;
+
+                // Calculate the actual segment at the pointer
+                const normalizedRotation = (360 - (rotation % 360)) % 360;
+                const segmentIndex = Math.floor(normalizedRotation / segmentAngle) % colors.length;
+                const color = colors[segmentIndex];
+
+                // Simulate server request delay
+                setTimeout(() => {
+                    // Save assignment
+                    const success = saveAssignment(employeeId, employeeName, color);
+
+                    if (!success) {
+                        // Handle Firebase error
+                        resultDiv.innerHTML = "Technical error! Please contact host";
+                        spinButton.disabled = false;
+                        return;
                     }
-                });
+
+                    // Update UI
+                    resultDiv.innerHTML = `<div class="color-indicator">
+                        <span class="color-box" style="background:${color.value}"></span>
+                        <span>Hi ${employeeName}, your team is: <strong>${color.name}</strong></span>
+                    </div>`;
+
+                    // Disable further spins
+                    employeeIdInput.disabled = true;
+                    employeeNameInput.disabled = true;
+
+                    // Show success message
+                    setTimeout(() => {
+                        alert(`Assignment complete! ${employeeName}, you are on the ${color.name} team.`);
+                    }, 500);
+                }, 5000);
             }
-        });
-    </script>
+
+            // Initialize the app
+            document.addEventListener('DOMContentLoaded', () => {
+                // Check if participant has already spun
+                const assignments = JSON.parse(localStorage.getItem('teamAssignments') || '{}');
+                const employeeIdInput = document.getElementById('employeeId');
+                const employeeNameInput = document.getElementById('employeeName');
+                const spinButton = document.getElementById('spinButton');
+
+                // Check if there's an assignment for this session
+                for (const id in assignments) {
+                    if (assignments.hasOwnProperty(id)) {
+                        const color = colors.find(c => c.name === assignments[id].team);
+                        employeeIdInput.value = id;
+                        employeeIdInput.disabled = true;
+                        employeeNameInput.value = assignments[id].name || "";
+                        employeeNameInput.disabled = true;
+                        spinButton.disabled = true;
+
+                        document.getElementById('result').innerHTML = `<div class="color-indicator">
+                            <span class="color-box" style="background:${color.value}"></span>
+                            <span>${assignments[id].name ? 'Hi ' + assignments[id].name + ', ' : ''}Your team is: <strong>${color.name}</strong></span>
+                        </div>`;
+
+                        document.getElementById('completedId').textContent = id;
+                        document.getElementById('completedName').textContent = assignments[id].name || "participant";
+                        document.getElementById('alreadyCompleted').style.display = 'block';
+                        break;
+                    }
+                }
+
+                // Set up event listeners
+                document.getElementById('spinButton').addEventListener('click', spinWheel);
+
+                // Add real-time listener for manual assignments
+                if (database) {
+                    database.ref('assignments').on('value', (snapshot) => {
+                        const assignments = snapshot.val() || {};
+                        localStorage.setItem('teamAssignments', JSON.stringify(assignments));
+
+                        // Check if current user has been assigned
+                        const employeeId = document.getElementById('employeeId').value;
+                        if (employeeId && assignments[employeeId]) {
+                            const color = colors.find(c => c.name === assignments[employeeId].team);
+                            showCompletedMessage(employeeId, assignments[employeeId].name, color);
+                        }
+                    });
+                }
+            });
+        </script>
 </body>
+
 </html>

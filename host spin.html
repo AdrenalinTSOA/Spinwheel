@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -12,7 +13,7 @@
             box-sizing: border-box;
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
-        
+
         body {
             background: linear-gradient(135deg, #1a2a6c, #b21f1f, #fdbb2d);
             min-height: 100vh;
@@ -22,14 +23,13 @@
             padding: 20px;
             color: white;
         }
-        
+
         .container {
             max-width: 1200px;
             width: 100%;
             margin: 0 auto;
         }
-        
-        /* Logo styling */
+
         .logo-container {
             position: absolute;
             top: 20px;
@@ -39,42 +39,94 @@
             flex-direction: column;
             align-items: center;
         }
-        
+
         .logo {
             height: 100px;
             width: auto;
             margin-bottom: 5px;
-            filter: drop-shadow(0 2px 4px rgba(0,0,0,0.3));
+            filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.3));
         }
-        
+
         .logo-text {
             font-size: 0.9rem;
             font-weight: bold;
             text-align: center;
             color: #fff;
-            text-shadow: 0 1px 3px rgba(0,0,0,0.5);
+            text-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
             letter-spacing: 1px;
         }
-        
+
         header {
             text-align: center;
             padding: 20px 0;
             width: 100%;
             position: relative;
         }
-        
+
         h1 {
             font-size: 2.8rem;
             margin-bottom: 10px;
             text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
         }
-        
+
         .subtitle {
             font-size: 1.4rem;
             margin-bottom: 30px;
             opacity: 0.9;
         }
-        
+
+        /* New overall completion panel */
+        .overall-completion {
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 25px;
+            margin: 0 auto 30px;
+            max-width: 800px;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .overall-title {
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+            color: #ffd700;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .completion-stats {
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .completion-stat {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-width: 150px;
+        }
+
+        .completion-value {
+            font-size: 3rem;
+            font-weight: bold;
+            margin: 5px 0;
+            color: #ffd700;
+            text-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
+        }
+
+        .completion-label {
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+
         .dashboard-content {
             display: flex;
             flex-wrap: wrap;
@@ -82,7 +134,7 @@
             justify-content: center;
             margin: 20px 0;
         }
-        
+
         .card {
             flex: 1;
             min-width: 350px;
@@ -93,14 +145,14 @@
             padding: 30px;
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
         }
-        
+
         .section-title {
             font-size: 1.8rem;
             margin-bottom: 20px;
             text-align: center;
             color: #ffd700;
         }
-        
+
         .admin-note {
             margin-top: 20px;
             padding: 15px;
@@ -108,14 +160,14 @@
             border-radius: 10px;
             border-left: 4px solid #ff5252;
         }
-        
+
         .stats {
             display: flex;
             flex-wrap: wrap;
             gap: 15px;
             margin: 20px 0;
         }
-        
+
         .stat-item {
             flex: 1;
             min-width: 120px;
@@ -124,18 +176,18 @@
             background: rgba(255, 255, 255, 0.1);
             text-align: center;
         }
-        
+
         .stat-value {
             font-size: 1.8rem;
             font-weight: bold;
             margin: 5px 0;
         }
-        
+
         .stat-label {
             font-size: 0.9rem;
             opacity: 0.8;
         }
-        
+
         .color-box {
             display: inline-block;
             width: 20px;
@@ -145,14 +197,14 @@
             border-radius: 4px;
             border: 1px solid rgba(0, 0, 0, 0.3);
         }
-        
+
         .host-controls {
             margin-top: 20px;
             padding: 20px;
             background: rgba(0, 0, 0, 0.2);
             border-radius: 10px;
         }
-        
+
         .download-button {
             display: block;
             width: 100%;
@@ -166,12 +218,12 @@
             margin-top: 15px;
             transition: all 0.3s;
         }
-        
+
         .download-button:hover {
             transform: translateY(-3px);
             box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
         }
-        
+
         .reset-button {
             display: block;
             width: 100%;
@@ -185,12 +237,12 @@
             margin-top: 15px;
             transition: all 0.3s;
         }
-        
+
         .reset-button:hover {
             transform: translateY(-3px);
             box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
         }
-        
+
         .assignment-card {
             background: rgba(255, 255, 255, 0.1);
             border-radius: 10px;
@@ -200,7 +252,7 @@
             justify-content: space-between;
             align-items: center;
         }
-        
+
         .assignments-container {
             max-height: 300px;
             overflow-y: auto;
@@ -209,27 +261,27 @@
             background: rgba(0, 0, 0, 0.1);
             border-radius: 10px;
         }
-        
+
         .team-color {
             display: flex;
             align-items: center;
             gap: 8px;
         }
-        
+
         .team-color-box {
             width: 15px;
             height: 15px;
             border-radius: 3px;
             border: 1px solid rgba(0, 0, 0, 0.3);
         }
-        
+
         .team-distribution {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
             gap: 10px;
             margin-top: 20px;
         }
-        
+
         .team-dist-item {
             padding: 15px;
             border-radius: 10px;
@@ -238,12 +290,12 @@
             flex-direction: column;
             align-items: center;
         }
-        
+
         .team-dist-value {
             font-size: 1.8rem;
             font-weight: bold;
         }
-        
+
         .key-modal {
             display: flex;
             position: fixed;
@@ -256,7 +308,7 @@
             justify-content: center;
             align-items: center;
         }
-        
+
         .modal-content {
             background: rgba(255, 255, 255, 0.15);
             backdrop-filter: blur(10px);
@@ -267,13 +319,13 @@
             text-align: center;
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
         }
-        
+
         .modal-title {
             font-size: 1.8rem;
             margin-bottom: 20px;
             color: #ffd700;
         }
-        
+
         .modal-input {
             width: 100%;
             padding: 15px;
@@ -284,7 +336,7 @@
             font-size: 1.1rem;
             margin: 15px 0;
         }
-        
+
         .modal-button {
             padding: 12px 30px;
             background: linear-gradient(45deg, #00c853, #009624);
@@ -296,16 +348,16 @@
             margin: 10px 5px;
             transition: all 0.3s;
         }
-        
+
         .modal-button.cancel {
             background: linear-gradient(45deg, #ff3d00, #d50000);
         }
-        
+
         .modal-button:hover {
             transform: translateY(-3px);
             box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
         }
-        
+
         .footer {
             margin-top: 30px;
             text-align: center;
@@ -313,7 +365,7 @@
             width: 100%;
             opacity: 0.8;
         }
-        
+
         .realtime-indicator {
             display: flex;
             align-items: center;
@@ -323,7 +375,7 @@
             color: #00ff00;
             font-weight: bold;
         }
-        
+
         .realtime-indicator .blink {
             display: inline-block;
             width: 12px;
@@ -332,29 +384,37 @@
             border-radius: 50%;
             animation: blink 1s infinite;
         }
-        
+
         @keyframes blink {
-            0% { opacity: 1; }
-            50% { opacity: 0.3; }
-            100% { opacity: 1; }
+            0% {
+                opacity: 1;
+            }
+
+            50% {
+                opacity: 0.3;
+            }
+
+            100% {
+                opacity: 1;
+            }
         }
-        
+
         .manual-assignment-form {
             display: flex;
             flex-direction: column;
             gap: 15px;
         }
-        
+
         .form-group {
             display: flex;
             flex-direction: column;
         }
-        
+
         .form-group label {
             margin-bottom: 8px;
             font-weight: bold;
         }
-        
+
         .form-group select {
             padding: 12px;
             border-radius: 10px;
@@ -363,7 +423,7 @@
             color: white;
             font-size: 1rem;
         }
-        
+
         .manual-button {
             background: linear-gradient(45deg, #2196F3, #0d47a1);
             color: white;
@@ -374,64 +434,111 @@
             cursor: pointer;
             transition: all 0.3s;
         }
-        
+
         .manual-button:hover {
             transform: translateY(-3px);
             box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
         }
-        
+
         @media (max-width: 768px) {
             .dashboard-content {
                 flex-direction: column;
                 align-items: center;
             }
-            
+
             .team-distribution {
                 grid-template-columns: 1fr;
             }
-            
-            /* Mobile logo adjustments */
+
             .logo-container {
                 top: 15px;
                 right: 15px;
             }
-            
+
             .logo {
                 height: 40px;
             }
-            
+
             .logo-text {
                 font-size: 0.7rem;
             }
+
+            .completion-stats {
+                flex-direction: column;
+                gap: 10px;
+            }
+        }
+
+        /* Team name adjustments */
+        .team-dist-item,
+        .stat-item {
+            min-height: 70px;
+        }
+
+        .team-dist-item>div,
+        .stat-label {
+            text-align: center;
+            line-height: 1.3;
+        }
+
+        /* Animation for completion stats */
+        @keyframes pulse {
+            0% {
+                transform: scale(1);
+            }
+
+            50% {
+                transform: scale(1.05);
+            }
+
+            100% {
+                transform: scale(1);
+            }
+        }
+
+        .pulse {
+            animation: pulse 1.5s ease-in-out;
+        }
+
+        /* New styles for employee names */
+        .employee-name {
+            font-weight: bold;
+            margin-bottom: 4px;
+        }
+
+        .employee-id {
+            font-size: 0.8rem;
+            opacity: 0.7;
         }
     </style>
-    
+
     <!-- Firebase SDK -->
     <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-database.js"></script>
 </head>
+
 <body>
     <!-- Logo in top right corner -->
-     <div class="logo-container">
+    <div class="logo-container">
         <img src="LOGO/adrenalin_Logo.jpg" alt="Adrenalin Logo" class="logo">
     </div>
-    
+
     <!-- Key Access Modal -->
     <div id="keyModal" class="key-modal">
         <div class="modal-content">
             <h2 class="modal-title"><i class="fas fa-lock"></i> Host Dashboard Access</h2>
             <p>Please enter the host security key to access the host dashboard.</p>
-            
+
             <input type="password" id="modalKeyInput" class="modal-input" placeholder="Enter host key">
             <div id="keyError" style="color: #ff5252; margin: 10px 0; display: none;">
                 <i class="fas fa-exclamation-circle"></i> Incorrect key. Please try again.
             </div>
-            
+
             <button class="modal-button" id="submitKey">Submit Key</button>
             <button class="modal-button cancel" id="cancelKey">Cancel</button>
         </div>
     </div>
-    
+
     <div class="container">
         <header>
             <h1><i class="fas fa-sync-alt"></i> Team Selection</h1>
@@ -441,143 +548,175 @@
                 <span>REAL-TIME UPDATES ACTIVE</span>
             </div>
         </header>
-        
+
+        <!-- New Overall Completion Panel -->
+        <div class="overall-completion">
+            <div class="overall-title">
+                <i class="fas fa-chart-line"></i>
+                <h3>Overall Completion Status</h3>
+                <i class="fas fa-chart-line"></i>
+            </div>
+            <div class="completion-stats">
+                <div class="completion-stat">
+                    <div class="completion-value" id="totalCompleted">0</div>
+                    <div class="completion-label">Completed Assignments</div>
+                </div>
+                <div class="completion-stat">
+                    <div class="completion-value" id="totalTeams">5</div>
+                    <div class="completion-label">Total Teams</div>
+                </div>
+                <div class="completion-stat">
+                    <div class="completion-value" id="avgPerTeam">0</div>
+                    <div class="completion-label">Avg. per Team</div>
+                </div>
+            </div>
+        </div>
+
         <div class="dashboard-content">
             <div class="card">
                 <h2 class="section-title">Host Portal</h2>
-                
+
                 <div class="admin-note">
-                    <p><i class="fas fa-lock"></i> <strong>Admin Access Only:</strong> This section is for event hosts to manage team assignments.</p>
+                    <p><i class="fas fa-lock"></i> <strong>Admin Access Only:</strong> This section is for event hosts
+                        to manage team assignments.</p>
                 </div>
-                
+
                 <div class="stats">
                     <div class="stat-item">
                         <div class="stat-value" id="assignedCount">0</div>
                         <div class="stat-label">Total Assigned</div>
                     </div>
                 </div>
-                
+
                 <div class="team-distribution">
                     <div class="team-dist-item" style="border-left: 5px solid #e74c3c;">
-                        <div class="team-dist-value" id="redCount">0</div>
+                        <div class="team-dist-value" id="passionCount">0</div>
                         <div class="team-color">
                             <div class="team-color-box" style="background: #e74c3c;"></div>
-                            <div>Red Team</div>
+                            <div>Passion</div>
                         </div>
                     </div>
                     <div class="team-dist-item" style="border-left: 5px solid #3498db;">
-                        <div class="team-dist-value" id="blueCount">0</div>
+                        <div class="team-dist-value" id="challengeCount">0</div>
                         <div class="team-color">
                             <div class="team-color-box" style="background: #3498db;"></div>
-                            <div>Blue Team</div>
+                            <div>Challenge &<br>Speaking up</div>
                         </div>
                     </div>
                     <div class="team-dist-item" style="border-left: 5px solid #2ecc71;">
-                        <div class="team-dist-value" id="greenCount">0</div>
+                        <div class="team-dist-value" id="customerCount">0</div>
                         <div class="team-color">
                             <div class="team-color-box" style="background: #2ecc71;"></div>
-                            <div>Green Team</div>
+                            <div>Customer<br>Delight</div>
                         </div>
                     </div>
                     <div class="team-dist-item" style="border-left: 5px solid #f1c40f;">
-                        <div class="team-dist-value" id="yellowCount">0</div>
+                        <div class="team-dist-value" id="respectCount">0</div>
                         <div class="team-color">
                             <div class="team-color-box" style="background: #f1c40f;"></div>
-                            <div>Yellow Team</div>
+                            <div>Respect</div>
                         </div>
                     </div>
                     <div class="team-dist-item" style="border-left: 5px solid #9b59b6;">
-                        <div class="team-dist-value" id="purpleCount">0</div>
+                        <div class="team-dist-value" id="qualityCount">0</div>
                         <div class="team-color">
                             <div class="team-color-box" style="background: #9b59b6;"></div>
-                            <div>Purple Team</div>
+                            <div>Quality</div>
                         </div>
                     </div>
                 </div>
-                
+
                 <div class="host-controls">
                     <h3><i class="fas fa-file-excel"></i> Team Assignment Report</h3>
-                    <p>Download the full list of employee assignments with their team colors.</p>
-                    
+                    <p>Download the full list of employee assignments with their team values.</p>
+
                     <div class="input-group">
                         <label for="adminKey">Host Security Key:</label>
                         <input type="password" id="adminKey" placeholder="Enter host key">
                     </div>
-                    
+
                     <button class="download-button" id="downloadButton">
                         <i class="fas fa-download"></i> Download Excel Report
                     </button>
                 </div>
-                
+
                 <!-- Manual Assignment Section for Technical Glitches -->
                 <div class="host-controls">
                     <h3><i class="fas fa-user-cog"></i> Manual Assignment</h3>
                     <p>Manually assign a team for participants who faced technical issues:</p>
-                    
+
                     <div class="manual-assignment-form">
                         <div class="form-group">
                             <label for="manualEmployeeId">Employee ID:</label>
-                            <input type="text" id="manualEmployeeId" class="modal-input" placeholder="Enter employee ID">
+                            <input type="text" id="manualEmployeeId" class="modal-input"
+                                placeholder="Enter employee ID">
                         </div>
-                        
+
+                        <div class="form-group">
+                            <label for="manualEmployeeName">Employee Name:</label>
+                            <input type="text" id="manualEmployeeName" class="modal-input"
+                                placeholder="Enter employee name">
+                        </div>
+
                         <div class="form-group">
                             <label for="teamSelect">Select Team:</label>
                             <select id="teamSelect" class="modal-input">
-                                <option value="Red">Red Team</option>
-                                <option value="Blue">Blue Team</option>
-                                <option value="Green">Green Team</option>
-                                <option value="Yellow">Yellow Team</option>
-                                <option value="Purple">Purple Team</option>
+                                <option value="Passion">Passion</option>
+                                <option value="Challenge & Speaking up">Challenge & Speaking up</option>
+                                <option value="Customer Delight">Customer Delight</option>
+                                <option value="Respect">Respect</option>
+                                <option value="Quality">Quality</option>
                             </select>
                         </div>
-                        
+
                         <button class="manual-button" id="manualAssignButton">
                             <i class="fas fa-user-check"></i> Assign Team
                         </button>
                     </div>
-                    
-                    <div id="manualSuccess" style="display: none; margin-top: 15px; padding: 10px; background: rgba(0, 255, 0, 0.2); border-radius: 8px; text-align: center;">
+
+                    <div id="manualSuccess"
+                        style="display: none; margin-top: 15px; padding: 10px; background: rgba(0, 255, 0, 0.2); border-radius: 8px; text-align: center;">
                         <i class="fas fa-check-circle"></i> Team assigned successfully!
                     </div>
                 </div>
             </div>
-            
+
             <div class="card">
                 <h2 class="section-title">Live Assignments</h2>
-                
+
                 <div class="host-controls">
                     <h3><i class="fas fa-list"></i> Recent Assignments</h3>
                     <div class="assignments-container" id="assignmentsContainer">
                         <!-- Recent assignments will appear here -->
                     </div>
                 </div>
-                
+
                 <div class="host-controls">
                     <h3><i class="fas fa-chart-bar"></i> Team Distribution</h3>
                     <div class="stats">
                         <div class="stat-item" style="border-left: 5px solid #e74c3c;">
-                            <div class="stat-value" id="redTeamCount">0</div>
-                            <div class="stat-label">Red Team</div>
+                            <div class="stat-value" id="passionTeamCount">0</div>
+                            <div class="stat-label">Passion</div>
                         </div>
                         <div class="stat-item" style="border-left: 5px solid #3498db;">
-                            <div class="stat-value" id="blueTeamCount">0</div>
-                            <div class="stat-label">Blue Team</div>
+                            <div class="stat-value" id="challengeTeamCount">0</div>
+                            <div class="stat-label">Challenge &<br>Speaking up</div>
                         </div>
                         <div class="stat-item" style="border-left: 5px solid #2ecc71;">
-                            <div class="stat-value" id="greenTeamCount">0</div>
-                            <div class="stat-label">Green Team</div>
+                            <div class="stat-value" id="customerTeamCount">0</div>
+                            <div class="stat-label">Customer<br>Delight</div>
                         </div>
                         <div class="stat-item" style="border-left: 5px solid #f1c40f;">
-                            <div class="stat-value" id="yellowTeamCount">0</div>
-                            <div class="stat-label">Yellow Team</div>
+                            <div class="stat-value" id="respectTeamCount">0</div>
+                            <div class="stat-label">Respect</div>
                         </div>
                         <div class="stat-item" style="border-left: 5px solid #9b59b6;">
-                            <div class="stat-value" id="purpleTeamCount">0</div>
-                            <div class="stat-label">Purple Team</div>
+                            <div class="stat-value" id="qualityTeamCount">0</div>
+                            <div class="stat-label">Quality</div>
                         </div>
                     </div>
                 </div>
-                
+
                 <div class="host-controls">
                     <h3><i class="fas fa-redo"></i> System Reset</h3>
                     <p>Reset all assignments and start over. This action cannot be undone.</p>
@@ -591,11 +730,10 @@
                 </div>
             </div>
         </div>
-        
+
         <div class="footer">
-            <p>Team Selection Event | 5 Color Teams</p>
+            <p>Team Selection Event | 5 Team Values</p>
             <p>Only one spin allowed per participant</p>
-            <!-- Host key removed from public view -->
         </div>
     </div>
 
@@ -611,7 +749,7 @@
             appId: "1:1058584687065:web:7e9d8d3e209dbdee9fe9c8",
             measurementId: "G-084Q4KL0WB"
         };
-        
+
         // Initialize Firebase
         let database;
         try {
@@ -622,17 +760,17 @@
             console.error("Firebase initialization error:", error);
             alert("Error initializing Firebase. Please check console for details.");
         }
-        
+
         // Configuration
         const HOST_KEY = "HOSTKEY123"; // Keep this secure
         const colors = [
-            { name: "Red", value: "#e74c3c" },
-            { name: "Blue", value: "#3498db" },
-            { name: "Green", value: "#2ecc71" },
-            { name: "Yellow", value: "#f1c40f" },
-            { name: "Purple", value: "#9b59b6" }
+            { name: "Passion", value: "#e74c3c" },
+            { name: "Challenge & Speaking up", value: "#3498db" },
+            { name: "Customer Delight", value: "#2ecc71" },
+            { name: "Respect", value: "#f1c40f" },
+            { name: "Quality", value: "#9b59b6" }
         ];
-        
+
         // Real-time listener for assignments
         function setupRealtimeUpdates() {
             database.ref('assignments').on('value', (snapshot) => {
@@ -640,72 +778,92 @@
                 localStorage.setItem('teamAssignments', JSON.stringify(assignments));
                 updateStats();
                 updateRecentAssignments();
+                updateOverallCompletion(assignments);
             });
         }
-        
+
         // Update assignment stats
         function updateStats() {
             const assignments = JSON.parse(localStorage.getItem('teamAssignments') || '{}');
             const assignedCount = Object.keys(assignments).length;
             const assignedElem = document.getElementById('assignedCount');
-            
+
             assignedElem.textContent = assignedCount;
-            
+
             // Update team counts
             const teamCounts = {
-                "Red": 0,
-                "Blue": 0,
-                "Green": 0,
-                "Yellow": 0,
-                "Purple": 0
+                "Passion": 0,
+                "Challenge & Speaking up": 0,
+                "Customer Delight": 0,
+                "Respect": 0,
+                "Quality": 0
             };
-            
+
             for (const employeeId in assignments) {
                 const team = assignments[employeeId].team;
                 if (teamCounts.hasOwnProperty(team)) {
                     teamCounts[team]++;
                 }
             }
-            
-            document.getElementById('redCount').textContent = teamCounts.Red;
-            document.getElementById('blueCount').textContent = teamCounts.Blue;
-            document.getElementById('greenCount').textContent = teamCounts.Green;
-            document.getElementById('yellowCount').textContent = teamCounts.Yellow;
-            document.getElementById('purpleCount').textContent = teamCounts.Purple;
-            
-            document.getElementById('redTeamCount').textContent = teamCounts.Red;
-            document.getElementById('blueTeamCount').textContent = teamCounts.Blue;
-            document.getElementById('greenTeamCount').textContent = teamCounts.Green;
-            document.getElementById('yellowTeamCount').textContent = teamCounts.Yellow;
-            document.getElementById('purpleTeamCount').textContent = teamCounts.Purple;
+
+            document.getElementById('passionCount').textContent = teamCounts["Passion"];
+            document.getElementById('challengeCount').textContent = teamCounts["Challenge & Speaking up"];
+            document.getElementById('customerCount').textContent = teamCounts["Customer Delight"];
+            document.getElementById('respectCount').textContent = teamCounts["Respect"];
+            document.getElementById('qualityCount').textContent = teamCounts["Quality"];
+
+            document.getElementById('passionTeamCount').textContent = teamCounts["Passion"];
+            document.getElementById('challengeTeamCount').textContent = teamCounts["Challenge & Speaking up"];
+            document.getElementById('customerTeamCount').textContent = teamCounts["Customer Delight"];
+            document.getElementById('respectTeamCount').textContent = teamCounts["Respect"];
+            document.getElementById('qualityTeamCount').textContent = teamCounts["Quality"];
         }
-        
-        // Update recent assignments
+
+        // New function to update overall completion
+        function updateOverallCompletion(assignments) {
+            const totalCompleted = Object.keys(assignments).length;
+            const totalTeams = 5;
+            const avgPerTeam = totalCompleted > 0 ? (totalCompleted / totalTeams).toFixed(1) : 0;
+
+            document.getElementById('totalCompleted').textContent = totalCompleted;
+            document.getElementById('avgPerTeam').textContent = avgPerTeam;
+
+            // Add pulse animation when number changes
+            document.getElementById('totalCompleted').classList.add('pulse');
+            setTimeout(() => {
+                document.getElementById('totalCompleted').classList.remove('pulse');
+            }, 1500);
+        }
+
+        // Update recent assignments to show employee names instead of IDs
         function updateRecentAssignments() {
             const container = document.getElementById('assignmentsContainer');
             const assignments = JSON.parse(localStorage.getItem('teamAssignments') || '{}');
-            
+
             // Get last 5 assignments
             const keys = Object.keys(assignments);
             const recentAssignments = keys.slice(Math.max(keys.length - 5, 0)).reverse();
-            
+
             container.innerHTML = '';
-            
+
             if (recentAssignments.length === 0) {
                 container.innerHTML = '<p>No assignments yet</p>';
                 return;
             }
-            
+
             recentAssignments.forEach(employeeId => {
-                const colorName = assignments[employeeId].team;
+                const assignment = assignments[employeeId];
+                const colorName = assignment.team;
                 const color = colors.find(c => c.name === colorName);
-                const timestamp = new Date(assignments[employeeId].timestamp).toLocaleTimeString();
-                
+                const timestamp = new Date(assignment.timestamp).toLocaleTimeString();
+                const employeeName = assignment.name || "Unknown";
+
                 const card = document.createElement('div');
                 card.className = 'assignment-card';
                 card.innerHTML = `
                     <div>
-                        <strong>${employeeId}</strong>
+                        <div class="employee-name">${employeeName}</div>
+                        <div class="employee-id">ID: ${employeeId}</div>
                         <div style="font-size: 0.9rem; opacity: 0.8;">${timestamp}</div>
                     </div>
                     <div style="display: flex; align-items: center;">
@@ -713,35 +871,37 @@
                         <span>${colorName}</span>
                     </div>
                 `;
-                
+
                 container.appendChild(card);
             });
         }
-        
+
         // Download report handler
         function downloadReport() {
             const adminKey = document.getElementById('adminKey').value.trim();
-            
+
             if (!adminKey) {
                 alert("Please enter the host security key");
                 return;
             }
-            
+
             if (adminKey !== HOST_KEY) {
                 alert("Invalid host security key");
                 return;
             }
-            
+
             // Get assignments from localStorage
             const assignments = JSON.parse(localStorage.getItem('teamAssignments') || '{}');
-            
-            // Create CSV content
-            let csvContent = "Employee ID,Team Color\n";
+
+            // Create CSV content (now with employee names)
+            let csvContent = "Employee ID,Employee Name,Team Value\n";
             for (const employeeId in assignments) {
-                const team = assignments[employeeId].team;
-                csvContent += `${employeeId},${team}\n`;
+                const assignment = assignments[employeeId];
+                const team = assignment.team;
+                const name = assignment.name || '';
+                csvContent += `${employeeId},${name},${team}\n`;
             }
-            
+
             // Create and download file
             const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
             const url = URL.createObjectURL(blob);
@@ -752,109 +912,122 @@
             document.body.appendChild(link);
             link.click();
             document.body.removeChild(link);
-            
+
             alert("Report downloaded successfully!");
         }
-        
+
         // Manually assign team for technical glitches
         function manualAssignment() {
             const employeeId = document.getElementById('manualEmployeeId').value.trim();
+            const employeeName = document.getElementById('manualEmployeeName').value.trim();
             const team = document.getElementById('teamSelect').value;
-            
+
             if (!employeeId) {
                 alert("Please enter Employee ID");
                 return;
             }
-            
+
+            if (!employeeName) {
+                alert("Please enter Employee Name");
+                return;
+            }
+
             // Get assignments from localStorage
             const assignments = JSON.parse(localStorage.getItem('teamAssignments') || '{}');
-            
+
             // Check if employee is already assigned
             if (assignments[employeeId]) {
                 alert("This employee is already assigned to a team");
                 return;
             }
-            
+
             // Create assignment
             const assignment = {
                 team: team,
+                name: employeeName,
                 timestamp: new Date().getTime(),
                 manual: true
             };
-            
+
             // Save to Firebase
             if (database) {
                 database.ref('assignments/' + employeeId).set(assignment);
             } else {
                 console.error("Firebase database not initialized");
             }
-            
+
             // Save to localStorage
             assignments[employeeId] = assignment;
             localStorage.setItem('teamAssignments', JSON.stringify(assignments));
-            
+
             // Show success message
             const successElement = document.getElementById('manualSuccess');
             successElement.style.display = 'block';
             setTimeout(() => {
                 successElement.style.display = 'none';
             }, 3000);
-            
+
             // Clear form
             document.getElementById('manualEmployeeId').value = '';
+            document.getElementById('manualEmployeeName').value = '';
         }
-        
+
         // Reset all assignments
         function resetAllAssignments() {
             const resetKey = document.getElementById('resetKey').value.trim();
-            
+
             if (!resetKey) {
                 alert("Please enter the host security key");
                 return;
             }
-            
+
             if (resetKey !== HOST_KEY) {
                 alert("Invalid host security key");
                 return;
             }
-            
+
             if (!confirm("Are you sure you want to reset all assignments? This action cannot be undone.")) {
                 return;
             }
-            
+
             // Clear all stored data
             database.ref('assignments').remove();
             localStorage.removeItem('teamAssignments');
-            
+
             // Reset UI
             updateStats();
             updateRecentAssignments();
-            
+            updateOverallCompletion({});
+
             alert("All assignments have been reset successfully!");
         }
-        
+
         // Initialize the app
         document.addEventListener('DOMContentLoaded', () => {
             // Set up event listeners
             document.getElementById('downloadButton').addEventListener('click', downloadReport);
             document.getElementById('manualAssignButton').addEventListener('click', manualAssignment);
             document.getElementById('resetButton').addEventListener('click', resetAllAssignments);
-            
+
             // Key modal submit
             document.getElementById('submitKey').addEventListener('click', () => {
                 const enteredKey = document.getElementById('modalKeyInput').value.trim();
                 const errorElement = document.getElementById('keyError');
-                
+
                 if (enteredKey === HOST_KEY) {
                     document.getElementById('keyModal').style.display = 'none';
                     setupRealtimeUpdates();
                     updateStats();
                     updateRecentAssignments();
+
+                    // Initialize overall completion with current assignments
+                    const assignments = JSON.parse(localStorage.getItem('teamAssignments') || '{}');
+                    updateOverallCompletion(assignments);
                 } else {
                     errorElement.style.display = 'block';
                 }
             });
-            
+
             // Key modal cancel
             document.getElementById('cancelKey').addEventListener('click', () => {
                 document.getElementById('keyModal').style.display = 'none';
@@ -863,4 +1036,5 @@
         });
     </script>
 </body>
+
 </html>
