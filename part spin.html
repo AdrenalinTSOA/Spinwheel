@@ -15,13 +15,13 @@
         }
 
         body {
-            background: linear-gradient(135deg, #1a2a6c, #b21f1f, #fdbb2d);
+            background: linear-gradient(135deg, #f5f7fa, #e4edf9);
             min-height: 100vh;
             display: flex;
             flex-direction: column;
             align-items: center;
             padding: 20px;
-            color: white;
+            color: #2c3e50;
             position: relative;
         }
 
@@ -59,13 +59,14 @@
         h1 {
             font-size: 2.8rem;
             margin-bottom: 10px;
-            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+            color: #1a2a6c;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
         }
 
         .subtitle {
             font-size: 1.4rem;
             margin-bottom: 30px;
-            opacity: 0.9;
+            color: #5d6d7e;
         }
 
         .wheel-container {
@@ -83,7 +84,7 @@
             position: relative;
             overflow: hidden;
             transition: transform 5s cubic-bezier(0.2, 0.8, 0.2, 1);
-            box-shadow: 0 0 30px rgba(0, 0, 0, 0.4);
+            box-shadow: 0 0 30px rgba(0, 0, 0, 0.1);
             background: conic-gradient(#e74c3c 0deg 72deg,
                     #3498db 72deg 144deg,
                     #2ecc71 144deg 216deg,
@@ -92,6 +93,7 @@
             display: flex;
             justify-content: center;
             align-items: center;
+            border: 1px solid rgba(0, 0, 0, 0.05);
         }
 
         .wheel-inner {
@@ -105,13 +107,13 @@
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            box-shadow: 0 0 15px rgba(0, 0, 0, 0.4);
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
         }
 
         .wheel-text {
             font-size: 1.7rem;
             font-weight: bold;
-            color: #333;
+            color: #2c3e50;
             text-align: center;
             margin-bottom: 5px;
         }
@@ -130,7 +132,7 @@
             font-size: 1.2rem;
             font-weight: bold;
             color: white;
-            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
             height: 50%;
             left: 50%;
             bottom: 50%;
@@ -154,10 +156,10 @@
             transform: translateX(-50%) rotate(180deg);
             width: 40px;
             height: 60px;
-            background: #333;
+            background: #2c3e50;
             clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
             z-index: 10;
-            box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
         }
 
         .spin-button {
@@ -170,7 +172,7 @@
             cursor: pointer;
             margin: 30px 0;
             transition: all 0.3s;
-            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
             display: block;
             width: 100%;
             max-width: 480px;
@@ -180,11 +182,11 @@
 
         .spin-button:hover {
             transform: translateY(-3px);
-            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
         }
 
         .spin-button:disabled {
-            background: #555;
+            background: #95a5a6;
             cursor: not-allowed;
             transform: none;
             box-shadow: none;
@@ -197,7 +199,7 @@
             margin: 25px 0;
             padding: 15px 25px;
             border-radius: 15px;
-            background: rgba(255, 255, 255, 0.15);
+            background: rgba(255, 255, 255, 0.8);
             width: 100%;
             max-width: 480px;
             margin-left: auto;
@@ -206,6 +208,7 @@
             align-items: center;
             justify-content: center;
             flex-wrap: wrap;
+            border: 1px solid rgba(0, 0, 0, 0.05);
         }
 
         .input-group {
@@ -220,22 +223,23 @@
             margin-bottom: 12px;
             font-size: 1.3rem;
             text-align: center;
+            color: #2c3e50;
         }
 
         input {
             width: 100%;
             padding: 18px;
             border-radius: 12px;
-            border: 2px solid rgba(255, 255, 255, 0.3);
-            background: rgba(0, 0, 0, 0.2);
-            color: white;
+            border: 2px solid #d1d8e0;
+            background: #fff;
+            color: #2c3e50;
             font-size: 1.2rem;
             text-align: center;
         }
 
         input:focus {
             outline: none;
-            border-color: #ffd700;
+            border-color: #3498db;
         }
 
         .color-box {
@@ -245,7 +249,7 @@
             margin-right: 12px;
             vertical-align: middle;
             border-radius: 5px;
-            border: 1px solid rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(0, 0, 0, 0.1);
         }
 
         .color-indicator {
@@ -253,19 +257,20 @@
             align-items: center;
             padding: 8px 15px;
             border-radius: 25px;
-            background: rgba(0, 0, 0, 0.2);
+            background: rgba(255, 255, 255, 0.6);
             margin-top: 10px;
+            border: 1px solid rgba(0, 0, 0, 0.05);
         }
 
         .completed-message {
             font-size: 1.8rem;
-            color: #ff5252;
+            color: #e74c3c;
             text-align: center;
             padding: 25px;
-            background: rgba(0, 0, 0, 0.3);
+            background: rgba(255, 255, 255, 0.8);
             border-radius: 15px;
             margin: 30px 0;
-            border: 2px solid #ff5252;
+            border: 2px solid #e74c3c;
             max-width: 480px;
             margin-left: auto;
             margin-right: auto;
@@ -273,12 +278,12 @@
 
         .participant-id {
             font-weight: bold;
-            color: #ffd700;
+            color: #1a2a6c;
         }
 
         .participant-name {
             font-weight: bold;
-            color: #4dff88;
+            color: #27ae60;
         }
 
         .footer {
@@ -286,7 +291,7 @@
             text-align: center;
             padding: 25px;
             width: 100%;
-            opacity: 0.8;
+            color: #5d6d7e;
             font-size: 1.1rem;
         }
 
@@ -294,12 +299,14 @@
             font-size: 1.1rem;
             text-align: center;
             padding: 15px;
-            background: rgba(0, 0, 0, 0.2);
+            background: rgba(255, 255, 255, 0.6);
             border-radius: 10px;
             margin: 15px 0;
             max-width: 480px;
             margin-left: auto;
             margin-right: auto;
+            border: 1px solid rgba(0, 0, 0, 0.05);
+            color: #2c3e50;
         }
 
         /* Mobile Responsive Updates */
