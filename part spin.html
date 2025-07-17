@@ -309,6 +309,58 @@
             color: #2c3e50;
         }
 
+        .start-over-button {
+            background: linear-gradient(45deg, #2196F3, #0d47a1);
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: all 0.3s;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            margin-top: 15px;
+            display: inline-block;
+        }
+
+        .start-over-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
+        }
+
+        .new-session-indicator {
+            background: rgba(46, 204, 113, 0.2);
+            border: 2px solid #2ecc71;
+            border-radius: 10px;
+            padding: 15px;
+            text-align: center;
+            margin: 20px auto;
+            max-width: 480px;
+            font-size: 1.2rem;
+        }
+
+        .error-details {
+            font-size: 0.9rem;
+            color: #e74c3c;
+            margin-top: 10px;
+            padding: 10px;
+            background: rgba(231, 76, 60, 0.1);
+            border-radius: 8px;
+            text-align: left;
+            display: none;
+        }
+
+        .debug-button {
+            background: #34495e;
+            color: white;
+            border: none;
+            padding: 8px 15px;
+            border-radius: 5px;
+            font-size: 0.8rem;
+            cursor: pointer;
+            margin-top: 5px;
+        }
+
         /* Mobile Responsive Updates */
         @media (max-width: 600px) {
             h1 {
@@ -418,10 +470,6 @@
             }
         }
     </style>
-
-    <!-- Firebase SDK -->
-    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-database.js"></script>
 </head>
 
 <body>
@@ -435,6 +483,7 @@
             <h1><i class="fas fa-sync-alt"></i> TSOA Selection</h1>
         </header>
 
+
         <div class="wheel-container">
             <div class="pointer"></div>
             <div class="wheel" id="wheel">
@@ -443,28 +492,22 @@
                     <div class="wheel-text">TSOA</div>
                 </div>
                 <div class="wheel-labels">
-
                     <div class="wheel-label" style="--rotation: 36deg">Passion</div>
-
                     <div class="wheel-label" style="--rotation: 324deg">Quality</div>
-
                     <div class="wheel-label" style="--rotation: 252deg">Respect</div>
-
                     <div class="wheel-label" style="--rotation: 180deg">Customer<br>Delight</div>
-
                     <div class="wheel-label" style="--rotation: 108deg">Challenge &<br>Speaking up</div>
-
                 </div>
             </div>
         </div>
 
-        <!-- New Employee Name Field -->
+        <!-- Employee Name Field -->
         <div class="input-group">
             <label for="employeeName">Enter Your Name:</label>
             <input type="text" id="employeeName" placeholder="E.g., John Smith" maxlength="50">
         </div>
 
-        <!-- Existing Employee ID Field -->
+        <!-- Employee ID Field -->
         <div class="input-group">
             <label for="employeeId">Enter Your Employee ID:</label>
             <input type="text" id="employeeId" placeholder="E.g., 01558" maxlength="7">
@@ -476,10 +519,17 @@
             Your team value will appear here
         </div>
 
+        <div class="error-details" id="errorDetails">
+            <strong>Error Details:</strong>
+            <div id="errorMessage"></div>
+            <button class="debug-button" id="retryButton">Retry Connection</button>
+        </div>
+
         <div id="alreadyCompleted" class="completed-message" style="display: none;">
             <i class="fas fa-exclamation-triangle"></i> TSOA team selection is already completed for
             <span class="participant-name" id="completedName"></span>
             (<span class="participant-id" id="completedId"></span>)
+            <!-- <button class="start-over-button" id="startOverButton">Start New Session</button> -->
         </div>
 
         <div class="glitch-instructions" id="glitchInstructions" style="display: none;">
@@ -490,7 +540,8 @@
         <div class="footer">
             <p>Adrenalin eSystems Ltd</p>
         </div>
-
+        <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-database.js"></script>
         <script>
             // Firebase Configuration
             const firebaseConfig = {
@@ -506,14 +557,31 @@
 
             // Initialize Firebase
             let database;
-            try {
-                firebase.initializeApp(firebaseConfig);
-                console.log("Firebase initialized successfully");
-                database = firebase.database();
-            } catch (error) {
-                console.error("Firebase initialization error:", error);
-                // Show technical issue message
-                document.getElementById('glitchInstructions').style.display = 'block';
+            let firebaseInitialized = false;
+
+            function initializeFirebase() {
+                try {
+                    // Check if Firebase app already exists
+                    if (!firebase.apps.length) {
+                        firebase.initializeApp(firebaseConfig);
+                    }
+                    console.log("Firebase initialized successfully");
+                    database = firebase.database();
+                    firebaseInitialized = true;
+
+                    // Hide error messages
+                    document.getElementById('glitchInstructions').style.display = 'none';
+                    document.getElementById('errorDetails').style.display = 'none';
+
+                    return true;
+                } catch (error) {
+                    console.error("Firebase initialization error:", error);
+                    // Show detailed error message
+                    document.getElementById('errorMessage').textContent = error.message;
+                    document.getElementById('errorDetails').style.display = 'block';
+                    document.getElementById('glitchInstructions').style.display = 'block';
+                    return false;
+                }
             }
 
             // Updated Configuration with new labels
@@ -531,32 +599,40 @@
                 return assignments[employeeId];
             }
 
-            // Save participant assignment
-            function saveAssignment(employeeId, employeeName, color) {
-                // Save to Firebase
-                if (database) {
-                    database.ref('assignments/' + employeeId).set({
+            // Save participant assignment with error handling
+            async function saveAssignment(employeeId, employeeName, color) {
+                try {
+                    // Ensure Firebase is initialized
+                    if (!firebaseInitialized) {
+                        const initialized = initializeFirebase();
+                        if (!initialized) {
+                            return false;
+                        }
+                    }
+
+                    // Save to Firebase
+                    await database.ref('assignments/' + employeeId).set({
                         team: color.name,
-                        name: employeeName, // Store employee name
+                        name: employeeName,
                         timestamp: new Date().getTime()
                     });
-                } else {
-                    console.error("Firebase database not initialized");
-                    // Show technical issue message
-                    document.getElementById('glitchInstructions').style.display = 'block';
+
+                    // Save to localStorage
+                    const assignments = JSON.parse(localStorage.getItem('teamAssignments') || '{}');
+                    assignments[employeeId] = {
+                        team: color.name,
+                        name: employeeName,
+                        timestamp: new Date().getTime()
+                    };
+                    localStorage.setItem('teamAssignments', JSON.stringify(assignments));
+
+                    return true;
+                } catch (error) {
+                    console.error("Error saving assignment:", error);
+                    document.getElementById('errorMessage').textContent = error.message;
+                    document.getElementById('errorDetails').style.display = 'block';
                     return false;
                 }
-
-                // Save to localStorage
-                const assignments = JSON.parse(localStorage.getItem('teamAssignments') || '{}');
-                assignments[employeeId] = {
-                    team: color.name,
-                    name: employeeName, // Store employee name
-                    timestamp: new Date().getTime()
-                };
-                localStorage.setItem('teamAssignments', JSON.stringify(assignments));
-
-                return true;
             }
 
             // Show already completed message
@@ -584,8 +660,33 @@
                 </div>`;
             }
 
-            // Simulate spinning animation with precise pointer alignment
-            function spinWheel() {
+            // Reset form for a new participant
+            function resetForm() {
+                const employeeIdInput = document.getElementById('employeeId');
+                const employeeNameInput = document.getElementById('employeeName');
+                const spinButton = document.getElementById('spinButton');
+                const resultDiv = document.getElementById('result');
+                const completedMessage = document.getElementById('alreadyCompleted');
+                const errorDetails = document.getElementById('errorDetails');
+
+                // Clear inputs and reset state
+                employeeIdInput.value = '';
+                employeeNameInput.value = '';
+                employeeIdInput.disabled = false;
+                employeeNameInput.disabled = false;
+                spinButton.disabled = false;
+
+                // Reset UI elements
+                resultDiv.textContent = "Your team value will appear here";
+                completedMessage.style.display = 'none';
+                errorDetails.style.display = 'none';
+
+                // Reset wheel rotation
+                document.getElementById('wheel').style.transform = 'rotate(0deg)';
+            }
+
+            // Simulate spinning animation
+            async function spinWheel() {
                 const wheel = document.getElementById('wheel');
                 const spinButton = document.getElementById('spinButton');
                 const employeeIdInput = document.getElementById('employeeId');
@@ -593,6 +694,10 @@
                 const employeeId = employeeIdInput.value.trim();
                 const employeeName = employeeNameInput.value.trim();
                 const resultDiv = document.getElementById('result');
+                const errorDetails = document.getElementById('errorDetails');
+
+                // Hide previous errors
+                errorDetails.style.display = 'none';
 
                 if (!employeeId) {
                     alert("Please enter your Employee ID");
@@ -616,98 +721,99 @@
                 spinButton.disabled = true;
                 resultDiv.textContent = "Spinning...";
 
-                // Generate random rotation (5 full rotations + random segment)
+                // Generate random rotation
                 const fullRotations = 5;
                 const segmentAngle = 360 / colors.length;
                 const randomSegment = Math.floor(Math.random() * colors.length);
 
-                // Calculate rotation to land in the middle of a segment
+                // Calculate rotation
                 const rotation = (fullRotations * 360) + (randomSegment * segmentAngle) + (segmentAngle / 2);
 
                 // Apply rotation
                 wheel.style.transform = `rotate(${rotation}deg)`;
 
-                // Calculate the actual segment at the pointer
+                // Calculate the actual segment
                 const normalizedRotation = (360 - (rotation % 360)) % 360;
                 const segmentIndex = Math.floor(normalizedRotation / segmentAngle) % colors.length;
                 const color = colors[segmentIndex];
 
                 // Simulate server request delay
-                setTimeout(() => {
-                    // Save assignment
-                    const success = saveAssignment(employeeId, employeeName, color);
+                setTimeout(async () => {
+                    try {
+                        // Save assignment
+                        const success = await saveAssignment(employeeId, employeeName, color);
 
-                    if (!success) {
-                        // Handle Firebase error
+                        if (!success) {
+                            // Handle Firebase error
+                            resultDiv.innerHTML = "Technical error! Please contact host";
+                            spinButton.disabled = false;
+                            return;
+                        }
+
+                        // Update UI
+                        resultDiv.innerHTML = `<div class="color-indicator">
+                            <span class="color-box" style="background:${color.value}"></span>
+                            <span>Hi ${employeeName}, your team is: <strong>${color.name}</strong></span>
+                        </div>`;
+
+                        // Show success message
+                        setTimeout(() => {
+                            alert(`Hurraayyy! ${employeeName}, you are on the ${color.name} team.`);
+                        }, 500);
+                    } catch (error) {
+                        console.error("Error during spin process:", error);
                         resultDiv.innerHTML = "Technical error! Please contact host";
+                        document.getElementById('errorMessage').textContent = error.message;
+                        document.getElementById('errorDetails').style.display = 'block';
                         spinButton.disabled = false;
-                        return;
                     }
-
-                    // Update UI
-                    resultDiv.innerHTML = `<div class="color-indicator">
-                        <span class="color-box" style="background:${color.value}"></span>
-                        <span>Hi ${employeeName}, your team is: <strong>${color.name}</strong></span>
-                    </div>`;
-
-                    // Disable further spins
-                    employeeIdInput.disabled = true;
-                    employeeNameInput.disabled = true;
-
-                    // Show success message
-                    setTimeout(() => {
-                        alert(`Hurraayyy! ${employeeName}, you are on the ${color.name} team.`);
-                    }, 500);
                 }, 5000);
             }
 
             // Initialize the app
             document.addEventListener('DOMContentLoaded', () => {
-                // Check if participant has already spun
-                const assignments = JSON.parse(localStorage.getItem('teamAssignments') || '{}');
                 const employeeIdInput = document.getElementById('employeeId');
                 const employeeNameInput = document.getElementById('employeeName');
                 const spinButton = document.getElementById('spinButton');
+                // const startOverButton = document.getElementById('startOverButton');
+                const retryButton = document.getElementById('retryButton');
 
-                // Check if there's an assignment for this session
-                for (const id in assignments) {
-                    if (assignments.hasOwnProperty(id)) {
-                        const color = colors.find(c => c.name === assignments[id].team);
-                        employeeIdInput.value = id;
-                        employeeIdInput.disabled = true;
-                        employeeNameInput.value = assignments[id].name || "";
-                        employeeNameInput.disabled = true;
-                        spinButton.disabled = true;
+                // Initialize Firebase
+                initializeFirebase();
 
-                        document.getElementById('result').innerHTML = `<div class="color-indicator">
-                            <span class="color-box" style="background:${color.value}"></span>
-                            <span>${assignments[id].name ? 'Hi ' + assignments[id].name + ', ' : ''}Your team is: <strong>${color.name}</strong></span>
-                        </div>`;
-
-                        document.getElementById('completedId').textContent = id;
-                        document.getElementById('completedName').textContent = assignments[id].name || "participant";
-                        document.getElementById('alreadyCompleted').style.display = 'block';
-                        break;
-                    }
-                }
-
-                // Set up event listeners
-                document.getElementById('spinButton').addEventListener('click', spinWheel);
+                // Clear form and reset state on every page load
+                resetForm();
 
                 // Add real-time listener for manual assignments
-                if (database) {
+                if (firebaseInitialized && database) {
                     database.ref('assignments').on('value', (snapshot) => {
                         const assignments = snapshot.val() || {};
                         localStorage.setItem('teamAssignments', JSON.stringify(assignments));
-
-                        // Check if current user has been assigned
-                        const employeeId = document.getElementById('employeeId').value;
-                        if (employeeId && assignments[employeeId]) {
-                            const color = colors.find(c => c.name === assignments[employeeId].team);
-                            showCompletedMessage(employeeId, assignments[employeeId].name, color);
-                        }
                     });
                 }
+
+                // Add input change listeners
+                employeeIdInput.addEventListener('input', function () {
+                    const id = this.value.trim();
+                    if (id) {
+                        const assignment = checkParticipant(id);
+                        if (assignment) {
+                            const color = colors.find(c => c.name === assignment.team);
+                            showCompletedMessage(id, assignment.name, color);
+                        } else {
+                            // Reset UI if not completed
+                            document.getElementById('alreadyCompleted').style.display = 'none';
+                        }
+                    }
+                });
+
+                // Set up event listeners
+                spinButton.addEventListener('click', spinWheel);
+                // startOverButton.addEventListener('click', resetForm);
+                retryButton.addEventListener('click', () => {
+                    document.getElementById('errorDetails').style.display = 'none';
+                    initializeFirebase();
+                });
             });
         </script>
 </body>
