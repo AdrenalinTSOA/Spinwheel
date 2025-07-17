@@ -1055,7 +1055,43 @@
                     });
                 }
             });
+            // Add listener for team counts
+
+            database.ref('teamCounts').on('value', (snapshot) => {
+
+                const counts = snapshot.val() || {};
+
+                updateTeamCountsUI(counts);
+            });
         }
+        // Update team counts UI
+
+        function updateTeamCountsUI(counts) {
+
+            document.getElementById('passionCount').textContent = counts.Passion || 0;
+
+            document.getElementById('challengeCount').textContent = counts["Challenge & Speaking up"] || 0;
+
+            document.getElementById('customerCount').textContent = counts["Customer Delight"] || 0;
+
+            document.getElementById('respectCount').textContent = counts.Respect || 0;
+
+            document.getElementById('qualityCount').textContent = counts.Quality || 0;
+
+
+
+            document.getElementById('passionTeamCount').textContent = counts.Passion || 0;
+
+            document.getElementById('challengeTeamCount').textContent = counts["Challenge & Speaking up"] || 0;
+
+            document.getElementById('customerTeamCount').textContent = counts["Customer Delight"] || 0;
+
+            document.getElementById('respectTeamCount').textContent = counts.Respect || 0;
+
+            document.getElementById('qualityTeamCount').textContent = counts.Quality || 0;
+
+        }
+
 
         // Update assignment stats
         function updateStats() {
@@ -1197,20 +1233,12 @@
             const employeeName = document.getElementById('manualEmployeeName').value.trim();
             const team = document.getElementById('teamSelect').value;
 
-            if (!employeeId) {
-                alert("Please enter Employee ID");
+            if (!employeeId || !employeeName) {
+
+                alert("Please fill all fields");
                 return;
             }
-
-            if (!employeeName) {
-                alert("Please enter Employee Name");
-                return;
-            }
-
-            // Get assignments from localStorage
-            const assignments = JSON.parse(localStorage.getItem('teamAssignments') || '{}');
-
-            // Check if employee is already assigned
+            const assignments = JSON.parse(localStorage.getItem('teamAssignments') || {});
             if (assignments[employeeId]) {
                 alert("This employee is already assigned to a team");
                 return;
@@ -1225,24 +1253,32 @@
             };
 
             // Save to Firebase
-            if (database) {
-                database.ref('assignments/' + employeeId).set(assignment);
-            } else {
-                console.error("Firebase database not initialized");
-            }
+            // Update team count
 
+            database.ref('teamCounts').transaction((currentCounts) => {
+
+                if (!currentCounts) currentCounts = {};
+
+                currentCounts[team] = (currentCounts[team] || 0) + 1;
+
+                return currentCounts;
+
+            });
             // Save to localStorage
+            // Save assignment
+
+            database.ref('assignments/' + employeeId).set(assignment);
+
+
+
+            // Update UI
             assignments[employeeId] = assignment;
             localStorage.setItem('teamAssignments', JSON.stringify(assignments));
 
             // Show success message
             const successElement = document.getElementById('manualSuccess');
             successElement.style.display = 'block';
-            setTimeout(() => {
-                successElement.style.display = 'none';
-            }, 3000);
-
-            // Clear form
+            setTimeout(() => successElement.style.display = 'none', 3000);
             document.getElementById('manualEmployeeId').value = '';
             document.getElementById('manualEmployeeName').value = '';
         }
@@ -1266,6 +1302,25 @@
             }
 
             // Clear all stored data
+            // Reset team counts
+
+            const resetCounts = {
+
+                "Passion": 0,
+
+                "Challenge & Speaking up": 0,
+
+                "Customer Delight": 0,
+
+                "Respect": 0,
+
+                "Quality": 0
+
+            };
+
+
+
+            database.ref('teamCounts').set(resetCounts);
             database.ref('assignments').remove();
             localStorage.removeItem('teamAssignments');
 
@@ -1273,6 +1328,7 @@
             updateStats();
             updateRecentAssignments();
             updateOverallCompletion({});
+            updateTeamCountsUI(resetCounts);
 
             // Reset live assignment boxes
             document.getElementById('passion-participant').textContent = "Waiting for assignment...";
@@ -1303,7 +1359,15 @@
                     updateRecentAssignments();
 
                     // Initialize overall completion with current assignments
-                    const assignments = JSON.parse(localStorage.getItem('teamAssignments') || '{}');
+                    database.ref('teamCounts').once('value', (snapshot) => {
+
+                        updateTeamCountsUI(snapshot.val() || {});
+
+                    });
+
+
+
+                    const assignments = JSON.parse(localStorage.getItem('teamAssignments') || {});
                     updateOverallCompletion(assignments);
                 } else {
                     errorElement.style.display = 'block';
