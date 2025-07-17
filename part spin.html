@@ -129,7 +129,7 @@
 
         .wheel-label {
             position: absolute;
-            font-size: 1.2rem;
+            font-size: clamp(1rem, 1.2vw, 1.4rem);
             font-weight: bold;
             color: white;
             text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
@@ -141,10 +141,10 @@
             align-items: flex-end;
             text-align: center;
             line-height: 1.2;
-            width: 120px;
+            width: clamp(80px, 13vw, 120px);
             transform-origin: bottom center;
             transform: translateX(-50%) rotate(var(--rotation));
-            padding-bottom: 25%;
+            padding-bottom: clamp(30%, 6vw, 40%);
             word-break: break-word;
             hyphens: auto;
         }
@@ -379,9 +379,25 @@
             }
 
             .wheel-label {
-                font-size: 1.1rem;
-                width: 100px;
-                padding-bottom: 40%;
+                position: absolute;
+                font-size: clamp(1rem, 1.2vw, 1.4rem);
+                font-weight: bold;
+                color: white;
+                text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+                height: 50%;
+                left: 50%;
+                bottom: 50%;
+                display: flex;
+                justify-content: center;
+                align-items: flex-end;
+                text-align: center;
+                line-height: 1.2;
+                width: clamp(100px, 14vw, 140px);
+                transform-origin: bottom center;
+                transform: translateX(-50%) rotate(var(--rotation));
+                padding-bottom: clamp(25%, 6vw, 35%);
+                word-break: break-word;
+                hyphens: auto;
             }
 
             .wheel-inner {
@@ -446,9 +462,25 @@
             }
 
             .wheel-label {
-                font-size: 0.95rem;
-                padding-bottom: 26%;
-                width: 85px;
+                position: absolute;
+                font-size: clamp(1rem, 1.2vw, 1.4rem);
+                font-weight: bold;
+                color: white;
+                text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+                height: 50%;
+                left: 50%;
+                bottom: 50%;
+                display: flex;
+                justify-content: center;
+                align-items: flex-end;
+                text-align: center;
+                line-height: 1.2;
+                width: clamp(100px, 14vw, 140px);
+                transform-origin: bottom center;
+                transform: translateX(-50%) rotate(var(--rotation));
+                padding-bottom: clamp(25%, 6vw, 35%);
+                word-break: break-word;
+                hyphens: auto;
             }
 
             .wheel-text {
